@@ -18,13 +18,14 @@ require_once __TYPECHO_ROOT_DIR__ . '/var/Typecho/Common.php';
 \Typecho\Common::init();
 
 // config db
-$db = new \Typecho\Db('Pdo_Pgsql', 'typecho_');
+$db = new Typecho_Db($_ENV["ADAPTER_NAME"], $_ENV["PREFIX"]);
 $db->addServer(array (
-  'host' => 'ep-dry-moon-a4lqrxoz-pooler.us-east-1.aws.neon.tech',
-  'port' => 5432,
-  'user' => 'neondb_owner',
-  'password' => 'npg_wK0AnDOQF1Cq',
-  'charset' => 'utf8',
-  'database' => 'neondb',
-), \Typecho\Db::READ | \Typecho\Db::WRITE);
-\Typecho\Db::set($db);
+  'host' => $_ENV["HOST"],
+  'user' => $_ENV["USERNAME"],
+  'password' => $_ENV["PASSWORD"],
+  'charset' => $_ENV["CHARSET"],
+  'port' => $_ENV["PORT"],
+  'database' => $_ENV["DATABASE"],
+  'engine' => $_ENV["ENGINE"],
+), Typecho_Db::READ | Typecho_Db::WRITE);
+Typecho_Db::set($db);
